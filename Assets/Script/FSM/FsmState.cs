@@ -5,10 +5,11 @@ using System.Collections.Generic;
 
 namespace FSM
 {
+    [System.Serializable]
     public partial class FsmState
     {
-        Action[] _actions;
-        TransitionSet[] _transitionSets;
+        [SerializeField] Action[] _actions;
+        [SerializeField] TransitionSet[] _transitionSets;
 
         public void Start()
         {
@@ -57,10 +58,11 @@ namespace FSM
             public abstract bool MeetCondition();
         }
 
-        public struct TransitionSet
+        [System.Serializable]
+        public class TransitionSet
         {
-            public FsmState NextState { get; set; }
-            public List<TransitionCondition> Conditions { get; set; }
+            [SerializeField] public FsmState NextState;
+            [SerializeField] public TransitionCondition[] Conditions;
         }
     }
 }

@@ -9,7 +9,7 @@ namespace FSM
         [MenuItem("FSM/Editor")]
         static void OpenFsmEditor()
         {
-            EditorWindow.GetWindow<FsmEditor>("FSM Editor");
+            EditorWindow.GetWindow<FsmEditor>("FSM Editor").OnSelectionChange();
         }
     }
 }

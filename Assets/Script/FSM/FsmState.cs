@@ -5,15 +5,21 @@ using System.Collections.Generic;
 
 namespace FSM
 {
-    [System.Serializable]
     public partial class FsmState
     {
-        [SerializeField] Action[] _actions;
-        [SerializeField] TransitionSet[] _transitionSets;
+        public FsmAction[] _actions;
+        public FsmTransition[] _transitions;
+
+        public Fsm FSM { get; private set; }
+
+        public FsmState(Fsm fsm)
+        {
+            FSM = fsm;
+        }
 
         public void Start()
         {
-            foreach (Action action in _actions)
+            foreach (FsmAction action in _actions)
             {
                 action.OnStart();
             }
@@ -21,7 +27,7 @@ namespace FSM
 
         public void Update()
         {
-            foreach (Action action in _actions)
+            foreach (FsmAction action in _actions)
             {
                 action.OnUpdate();
             }
@@ -29,7 +35,7 @@ namespace FSM
 
         public void Exit()
         {
-            foreach(Action action in _actions)
+            foreach(FsmAction action in _actions)
             {
                 action.OnExit();
             }
@@ -37,32 +43,8 @@ namespace FSM
 
         public FsmState NextState()
         {
-            return _transitionSets.FirstOrDefault(item =>
-            {
-                return item.Conditions.All(item2 => item2.MeetCondition());
-            }).NextState;
-        }
-    }
-
-    partial class FsmState
-    {
-        public abstract class Action
-        {
-            public virtual void OnStart() { }
-            public virtual void OnUpdate() { }
-            public virtual void OnExit() { }
-        }
-
-        public abstract class TransitionCondition
-        {
-            public abstract bool MeetCondition();
-        }
-
-        [System.Serializable]
-        public class TransitionSet
-        {
-            [SerializeField] public FsmState NextState;
-            [SerializeField] public TransitionCondition[] Conditions;
+            FsmTransition transition = _transitions.FirstOrDefault(item => item.MeetConditions());
+            return transition != null ? transition.State : null;
         }
     }
 }

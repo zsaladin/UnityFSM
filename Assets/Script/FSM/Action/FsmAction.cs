@@ -7,6 +7,7 @@ namespace FSM
     public abstract class FsmAction
     {
         public FsmState State { get; private set; }
+
         public FsmAction(FsmState state)
         {
             State = state;

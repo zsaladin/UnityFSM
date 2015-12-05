@@ -3,7 +3,8 @@ using System.Collections.Generic;
 
 namespace FSM
 {
-    public class FsmRecord : ScriptableObject
+    [System.Serializable]
+    public class FsmRecord
     {
         public string Name;
         public State EntryState;
@@ -12,9 +13,9 @@ namespace FSM
         [System.Serializable]
         public class State
         {
-            public string Name = "";
+            public string Name = ""; 
             public List<FsmAction> Actions = new List<FsmAction>();
-            public List<FsmCondition> Conditions = new List<FsmCondition>();
+            public List<FsmTransition> Transitions = new List<FsmTransition> ();
             public Rect Rect;
         }
     }

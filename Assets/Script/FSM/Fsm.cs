@@ -22,8 +22,8 @@ namespace FSM
             {
                 new FsmTransition
                 {
-                    State = move,
-                    Conditions = new FsmCondition[]
+                    NextState = move,
+                    Conditions = new List<FsmCondition>
                     {
                         new FsmCondition_Input(idle) { IsPressedCondition = true }
                     }
@@ -34,8 +34,8 @@ namespace FSM
             {
                 new FsmTransition
                 {
-                    State = idle,
-                    Conditions = new FsmCondition[]
+                    NextState = idle,
+                    Conditions = new List<FsmCondition>
                     {
                         new FsmCondition_Input(move) { IsPressedCondition = false }
                     }

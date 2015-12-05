@@ -44,7 +44,7 @@ namespace FSM
         public FsmState NextState()
         {
             FsmTransition transition = _transitions.FirstOrDefault(item => item.MeetConditions());
-            return transition != null ? transition.State : null;
+            return transition != null ? transition.NextState : null;
         }
     }
 }

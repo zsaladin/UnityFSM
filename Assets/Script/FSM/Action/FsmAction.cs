@@ -4,7 +4,7 @@ using System.Collections;
 namespace FSM
 {
     [System.Serializable]
-    public abstract class FsmAction
+    public class FsmAction
     {
         public FsmState State { get; private set; }
 
